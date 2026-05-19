@@ -1,3 +1,21 @@
+-- ======== Lua ================================================================
+-- Mason Name: lua-language-server
+-- TODO: Only enable on lua files.
+require('lazydev').setup({
+	library = {
+		-- See the configuration section for more details
+		-- Load luvit types when the `vim.uv` word is found
+		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
+	},
+})
+
+
+-- LSP Config Name: lua_ls
+vim.lsp.enable('lua_ls')
+
+vim.lsp.enable('texlab')
+
+
 -- =============================================================================
 -- Language Options ============================================================
 -- =============================================================================
@@ -51,37 +69,6 @@ require('blink.cmp').setup({
 	-- See the fuzzy documentation for more information
 	fuzzy = { implementation = "prefer_rust_with_warning" }
 })
-
-
-
--- ======== Lua ================================================================
--- Mason Name: lua-language-server
--- TODO: Only enable on lua files.
-require('lazydev').setup({
-	library = {
-		-- See the configuration section for more details
-		-- Load luvit types when the `vim.uv` word is found
-		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-	},
-})
-
-
--- LSP Config Name: lua_ls
-vim.lsp.enable('lua_ls')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
