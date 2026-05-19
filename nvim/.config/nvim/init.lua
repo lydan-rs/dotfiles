@@ -82,6 +82,37 @@ require('aucmds').on_filetype(
 -- Mason =======================================================================
 -- =============================================================================
 
+local mason_tools = {
+	-- LSPs
+	'lua-language-server', -- lua_ls
+	'texlab', -- texlab 
+	'gobaldygook',
+	'notanlsp',
+	'somerandomtool',
+}
+
+local unrecognised_mason_packages = {}
+
+for _, tool in ipairs(mason_tools) do
+	if not require('mason-registry').is_installed(tool) then
+		if not require('mason-registry').has_package(tool) then
+			-- unrecognised_mason_packages:append(tool)
+			table.insert(unrecognised_mason_packages, tool)
+		else
+			-- require('mason-registry').install(tool)
+			vim.cmd({ cmd = 'MasonInstall', args = {tool} })
+		end
+	end
+end
+
+if #unrecognised_mason_packages then
+ local msg = 'Some Mason tools were not recognised, and therefore not installed.'
+ for _, tool in ipairs(unrecognised_mason_packages) do
+ 	msg = msg..'\n\t'..tool
+ end
+	vim.notify(msg, vim.log.levels.WARN)
+end
+
 
 -- =============================================================================
 -- Overview ====================================================================
