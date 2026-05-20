@@ -13,8 +13,18 @@ require('lazydev').setup({
 -- LSP Config Name: lua_ls
 vim.lsp.enable('lua_ls')
 
-vim.lsp.enable('texlab')
 
+
+-- vim.lsp.config('texlab', {
+-- 	settings = { texlab = { forwardSearch = {
+-- 		executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
+-- 		-- the -g arg keeps Skim in the background
+-- 		-- args = {"-g", "-r", "%l", "%p", "%f"}, -- TODO: What are the l p and f variables?
+-- 		args = {"-g", "-b", "%l", "%p", "%f"}, -- TODO: What are the l p and f variables?
+-- 	}}}
+-- })
+-- vim.lsp.enable('texlab')
+--
 
 -- =============================================================================
 -- Language Options ============================================================
@@ -49,6 +59,7 @@ require('blink.cmp').setup({
 
 		per_filetype = {
 			lua = { inherit_defaults=true, 'lazydev' },
+			tex = { 'omni', 'snippets', 'path' }
 		},
 
 		providers = {

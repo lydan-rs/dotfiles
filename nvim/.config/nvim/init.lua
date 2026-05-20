@@ -54,6 +54,7 @@ vim.pack.add({
 		version = vim.version.range('1.x'),
 	},
 	'https://github.com/nvim-treesitter/nvim-treesitter',
+	'https://github.com/lervag/vimtex',
 })
 
 -- =============================================================================
@@ -71,7 +72,7 @@ require('aucmds').on_filetype(
   {
 		'lua',
 		'markdown',
-		'tex',
+		-- 'tex', -- will let vimtex take care of this!
 	},
 	function ()
 		vim.treesitter.start()
