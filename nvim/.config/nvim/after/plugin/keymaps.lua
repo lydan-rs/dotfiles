@@ -112,5 +112,6 @@ miniclue.setup({
     miniclue.gen_clues.z(),
 		{ mode = {'n', 'x'}, keys = '<Leader>c', desc = '+Code' },
 		{ mode = {'n', 'x'}, keys = '<Leader>f', desc = '+Find' },
+		{ mode = {'n', 'x'}, keys = '<Leader>g', desc = '+GoTo' },
   },
 })

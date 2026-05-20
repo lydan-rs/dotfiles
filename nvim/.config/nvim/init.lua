@@ -1,3 +1,6 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 -- =============================================================================
 -- Plugin Hooks ================================================================
 -- =============================================================================
@@ -82,13 +85,12 @@ require('aucmds').on_filetype(
 -- Mason =======================================================================
 -- =============================================================================
 
+require('mason').setup()
+
 local mason_tools = {
 	-- LSPs
 	'lua-language-server', -- lua_ls
 	'texlab', -- texlab 
-	'gobaldygook',
-	'notanlsp',
-	'somerandomtool',
 }
 
 local unrecognised_mason_packages = {}
@@ -105,7 +107,7 @@ for _, tool in ipairs(mason_tools) do
 	end
 end
 
-if #unrecognised_mason_packages then
+if #unrecognised_mason_packages > 0 then
  local msg = 'Some Mason tools were not recognised, and therefore not installed.'
  for _, tool in ipairs(unrecognised_mason_packages) do
  	msg = msg..'\n\t'..tool

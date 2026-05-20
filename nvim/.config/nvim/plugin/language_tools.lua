@@ -23,7 +23,6 @@ vim.lsp.enable('texlab')
 local ls = require('luasnip')
 require("luasnip.loaders.from_vscode").lazy_load()
 
-require('mason').setup()
 
 -- require('friendly-snippets').setup() Not necessary. Called automatically by blink.
 require('blink.cmp').setup({
