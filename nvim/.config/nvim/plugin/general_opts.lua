@@ -30,6 +30,15 @@ vim.opt.mouse          = 'a' -- Enable mouse support
 vim.opt.clipboard      = 'unnamedplus' -- Check why we need to use unnamedplus specifically
 vim.opt.splitright     = true
 vim.opt.winbar         = ' '
+vim.opt.splitright     = false
+vim.opt.splitbelow     = false
+
+vim.api.nvim_create_autocmd('FileType', {
+	group = vim.api.nvim_create_augroup('vertical-help', {clear = true}),
+	desc = 'Force new help windows to open to the left.',
+	pattern = 'help',
+	command = 'wincmd H',
+})
 
 require('aucmds').on_color_hl(
 	'Make winbars transparent.',
