@@ -13,19 +13,6 @@ require('lazydev').setup({
 -- LSP Config Name: lua_ls
 vim.lsp.enable('lua_ls')
 
-
-
--- vim.lsp.config('texlab', {
--- 	settings = { texlab = { forwardSearch = {
--- 		executable = "/Applications/Skim.app/Contents/SharedSupport/displayline",
--- 		-- the -g arg keeps Skim in the background
--- 		-- args = {"-g", "-r", "%l", "%p", "%f"}, -- TODO: What are the l p and f variables?
--- 		args = {"-g", "-b", "%l", "%p", "%f"}, -- TODO: What are the l p and f variables?
--- 	}}}
--- })
--- vim.lsp.enable('texlab')
---
-
 -- =============================================================================
 -- Language Options ============================================================
 -- =============================================================================
@@ -35,6 +22,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 
 
 -- require('friendly-snippets').setup() Not necessary. Called automatically by blink.
+require('blink.compat').setup({})
 require('blink.cmp').setup({
 	keymap = { preset = 'default' },
 
@@ -59,7 +47,8 @@ require('blink.cmp').setup({
 
 		per_filetype = {
 			lua = { inherit_defaults=true, 'lazydev' },
-			tex = { 'omni', 'snippets', 'path' }
+			-- tex = { 'lsp', 'omni', 'snippets', 'path' }
+			tex = { 'vimtex', 'snippets', 'path' }
 		},
 
 		providers = {
@@ -68,6 +57,11 @@ require('blink.cmp').setup({
 				module = "lazydev.integrations.blink",
 				-- make lazydev completions top priority (see `:h blink.cmp`)
 				score_offset = 100,
+			},
+			vimtex = {
+				name = 'vimtex',
+				module = 'blink.compat.source',
+				score_offset = 15,
 			},
 		},
 	},

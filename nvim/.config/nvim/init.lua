@@ -53,8 +53,13 @@ vim.pack.add({
 		src = 'https://github.com/saghen/blink.cmp',
 		version = vim.version.range('1.x'),
 	},
+	{
+		src = 'https://github.com/saghen/blink.compat',
+		version = vim.version.range('2.x'),
+	},
 	'https://github.com/nvim-treesitter/nvim-treesitter',
 	'https://github.com/lervag/vimtex',
+	'https://github.com/micangl/cmp-vimtex'
 })
 
 -- =============================================================================
@@ -91,7 +96,6 @@ require('mason').setup()
 local mason_tools = {
 	-- LSPs
 	'lua-language-server', -- lua_ls
-	'texlab', -- texlab 
 }
 
 local unrecognised_mason_packages = {}
