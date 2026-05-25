@@ -1,61 +1,100 @@
+local map = vim.keymap.set
 -- =============================================================================
 -- Keymaps =====================================================================
 -- =============================================================================
 
 -- ======== Navigation =========================================================
-vim.keymap.set({'n', 'x'}, '<C-d>', '<C-d>zz')
-vim.keymap.set({'n', 'x'}, '<C-u>', '<C-u>zz')
+-- Center on up and down
+map({'n', 'x'}, '<C-d>', '<C-d>zz')
+map({'n', 'x'}, '<C-u>', '<C-u>zz')
 
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>')
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>')
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>')
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>')
+-- Window Navigation
+map('n', '<C-h>', '<C-w><C-h>')
+map('n', '<C-j>', '<C-w><C-j>')
+map('n', '<C-k>', '<C-w><C-k>')
+map('n', '<C-l>', '<C-w><C-l>')
 
 -- ======== Search =============================================================
-vim.keymap.set('n', '<Leader>o', MiniFiles.open, {desc = 'Open file explorer'})
+map('n', '<Leader>o', MiniFiles.open, {desc = 'Open file explorer'})
 
-vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<cr>')
-vim.keymap.set({'n', 'x'}, 'n', 'nzz')
-vim.keymap.set({'n', 'x'}, 'N', 'Nzz')
+map('n', '<esc>', '<cmd>nohlsearch<cr>')
+-- Center on search
+map({'n', 'x'}, 'n', 'nzz')
+map({'n', 'x'}, 'N', 'Nzz')
 
 local fzf_lua = require('fzf-lua')
-vim.keymap.set("n", "<leader>ff", fzf_lua.files, { desc = "find files" })
-vim.keymap.set("n", "<leader>fg", fzf_lua.live_grep, { desc = "live grep" })
-vim.keymap.set("n", "<leader>fb", fzf_lua.buffers, { desc = "find buffers" })
-vim.keymap.set("n", "<leader>fh", fzf_lua.help_tags, { desc = "help tags" })
-vim.keymap.set("n", "<leader>fo", fzf_lua.oldfiles, { desc = "recent files" })
-vim.keymap.set("n", "<leader>fr", fzf_lua.lsp_references, { desc = "lsp references" })
-vim.keymap.set("n", "<leader>fr", fzf_lua.resume, { desc = "resume search" })
-vim.keymap.set("n", "<leader>fd", fzf_lua.lsp_definitions, { desc = "lsp definitions" })
-vim.keymap.set("n", "<leader>fs", fzf_lua.lsp_document_symbols, { desc = "lsp document symbols" })
-vim.keymap.set("n", "<leader>fo", fzf_lua.builtin, { desc = "fzf-lua search options" })
+map("n", "<leader>ff", fzf_lua.files, { desc = "find files" })
+map("n", "<leader>fg", fzf_lua.live_grep, { desc = "live grep" })
+map("n", "<leader>fb", fzf_lua.buffers, { desc = "find buffers" })
+map("n", "<leader>fh", fzf_lua.help_tags, { desc = "help tags" })
+map("n", "<leader>fo", fzf_lua.oldfiles, { desc = "recent files" })
+map("n", "<leader>fr", fzf_lua.lsp_references, { desc = "lsp references" })
+map("n", "<leader>fr", fzf_lua.resume, { desc = "resume search" })
+map("n", "<leader>fd", fzf_lua.lsp_definitions, { desc = "lsp definitions" })
+map("n", "<leader>fs", fzf_lua.lsp_document_symbols, { desc = "lsp document symbols" })
+map("n", "<leader>fo", fzf_lua.builtin, { desc = "fzf-lua search options" })
 
 
 -- ======== LSP ================================================================
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('LSPKeybinds', { clear = true }),
   callback = function(event)
+
+		local lsp = vim.lsp.buf
+		local buf = event.buf
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+
+		local supports_method = function(method)
+			return client:supports_method(method, buf)
+		end
+
     local genOpts = function(description)
-      return { desc = description, buffer = event.buf, silent = true }
+      return { desc = description, buffer = buf, silent = true }
     end
 
-    vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, genOpts("Goto Definition"))
-    vim.keymap.set('n', '<leader>gD', vim.lsp.buf.declaration, genOpts("Goto Declaration"))
-    vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, genOpts("Goto Implementation"))
-    vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, genOpts("Goto References"))
-    vim.keymap.set('n', '<leader>gt', vim.lsp.buf.type_definition, genOpts("Goto Type Definition"))
+		if supports_method('textDocument/definition') then
+			map('n', '<leader>gd', lsp.definition, genOpts("Goto Definition"))
+		end
 
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, genOpts(""))
-    vim.keymap.set('n', '<leader>ch', vim.lsp.buf.hover, genOpts("Hover (Also 'K')"))
-    vim.keymap.set('n', '<leader>cH', vim.lsp.buf.signature_help, genOpts("Show Signature Help"))
-    -- vim.keymap.set('n', '<C-K>', vim.lsp.buf.signature_help, opts)
+		if supports_method('textDocument/declaration') then
+			map('n', '<leader>gD', lsp.declaration, genOpts("Goto Declaration"))
+		end
 
-    vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename, genOpts("Rename Symbol"))
-    vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, genOpts("Show Code Actions"))
+		if supports_method('textDocument/implementation') then
+			map('n', '<leader>gi', lsp.implementation, genOpts("Goto Implementation"))
+		end
+		-- vim.lsp.protocol.Methods.textDocument_references
+		if supports_method('textDocument/references') then
+			map('n', '<leader>gR', lsp.references, genOpts("Goto References"))
+		end
 
-    vim.keymap.set('n', '<leader>E', vim.diagnostic.open_float, genOpts("Open Diagnositc Float"))
-    vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, genOpts(''))
-    vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, genOpts(''))
+		if supports_method('textDocument/type_definition') then
+			map('n', '<leader>gt', lsp.type_definition, genOpts("Goto Type Definition"))
+		end
+
+		if supports_method('textDocument/hover') then
+			local opts = genOpts('Hover')
+			map('n', 'K', lsp.hover, opts)
+			map('n', '<leader>ch', lsp.hover, opts)
+		end
+
+		if supports_method('textDocument/signature_help') then
+			local opts = genOpts("Show Signature Help")
+			map('n', '<leader>cH', lsp.signature_help, opts)
+			map('n', '<C-K>', lsp.signature_help, opts)
+		end
+
+		if supports_method('textDocument/rename') then
+			map('n', '<leader>cr', lsp.rename, genOpts("Rename Symbol"))
+		end
+
+		if supports_method('textDocument/code_action') then
+			map({ 'n', 'v' }, '<leader>ca', lsp.code_action, genOpts("Show Code Actions"))
+		end
+
+    map('n', '<leader>E', vim.diagnostic.open_float, genOpts("Open Diagnositc Float"))
+    map('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, genOpts(''))
+    map('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, genOpts(''))
   end,
 })
 
