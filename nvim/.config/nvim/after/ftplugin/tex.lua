@@ -4,6 +4,21 @@ vim.b.miniclue_config = {
 	}
 }
 
+local set = vim.opt_local
+
+set.wrap           = true
+set.linebreak      = true
+-- set.columns        = 120
+set.number         = false
+set.relativenumber = false
+
+-- Remap keys for visual line navigation
+vim.keymap.set({'n', 'v'},'j', 'gj', {buffer = true, silent = true})
+vim.keymap.set({'n', 'v'},'k', 'gk', {buffer = true, silent = true})
+vim.keymap.set({'n', 'v'},'$', 'g$', {buffer = true, silent = true})
+vim.keymap.set({'n', 'v'},'^', 'g^', {buffer = true, silent = true})
+
+
 local vtmap = function(key, command, description)
 	vim.keymap.set(
 		'n',
@@ -24,16 +39,3 @@ vtmap('q', 'VimtexStop', 'Quit continuous compilation')
 vtmap('C', 'VimtexCompileSS', 'Begin single-shot compilation') -- TODO: Add in auto-save before single-shot compilation
 vtmap('f', 'VimtexView', 'Forward search.')
 
--- vim.keymap.set('n', '<leader>lc',
--- function() vim.cmd('LspTexlabBuild') end,
--- {
--- 	buffer = true,
--- 	desc = 'Build LaTeX document.'
--- })
---
--- vim.keymap.set('n', '<leader>lf',
--- function() vim.cmd('LspTexlabForward') end,
--- {
--- 	buffer = true,
--- 	desc = 'Show corresponding curor position in text document.'
--- })

@@ -1,6 +1,19 @@
 -- Mappings are defined manually in /after/ftplugin/tex.lua
 -- so that we can get descriptions.
-vim.g.vimtex_mappings_enabled = 0
+-- Without default maps we don't get text objects.
+vim.g.vimtex_mappings_enabled = 1
+
+vim.g.vimtex_imaps_enabled = 0 -- Using LuaSnip
+
+vim.g.vimtex_doc_handlers = {'vimtex#doc#handlers#texdoc'}
+
+
+
+
+
+
+
+
 
 vim.g.vimtex_view_enabled = 1
 -- TODO: Add guard to check for platform
@@ -18,7 +31,6 @@ For inverse search:
 	 |- Arguments: --headless -c "VimtexInverseSearch %line '%file'"
 --]]
 
-vim.notify('VimTex settings set.')
 
 --[[
 see vimtex_quickfix_open_on_warning and vimtex_quickfix_ignore_filters for better filter options.
