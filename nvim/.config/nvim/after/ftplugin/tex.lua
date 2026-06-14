@@ -8,9 +8,9 @@ local set = vim.opt_local
 
 set.wrap           = true
 set.linebreak      = true
--- set.columns        = 120
 set.number         = false
 set.relativenumber = false
+set.spell          = true
 
 -- Remap keys for visual line navigation
 vim.keymap.set({'n', 'v'},'j', 'gj', {buffer = true, silent = true})
@@ -32,6 +32,7 @@ local vtmap = function(key, command, description)
 		}
 	)
 end
+
 vtmap('i', 'VimtexInfo', 'Open VimTex info')
 vtmap('I', 'VimtexInfo!', 'Open full VimTex info')
 vtmap('c', 'VimtexCompile', 'Begin continuous compilation')
