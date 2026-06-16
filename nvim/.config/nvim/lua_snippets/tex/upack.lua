@@ -70,7 +70,7 @@ return {
 			condition=at_line_begin,
 		},
 		fmta(
-			'\\usepackage<><><>{<>}',
+			'\\Usepackage<><><>{<>}',
 			{
 				f(show_if_text, {2}, {user_args={'['}}),
 				i(2, '...', {
