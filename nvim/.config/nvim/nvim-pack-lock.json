@@ -19,6 +19,10 @@
       "rev": "c09ca05bfa0641754516f13294d73d3799a02fc8",
       "src": "https://github.com/micangl/cmp-vimtex"
     },
+    "conform.nvim": {
+      "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
+      "src": "https://github.com/stevearc/conform.nvim"
+    },
     "friendly-snippets": {
       "rev": "6cd7280adead7f586db6fccbd15d2cac7e2188b9",
       "src": "https://github.com/rafamadriz/friendly-snippets"

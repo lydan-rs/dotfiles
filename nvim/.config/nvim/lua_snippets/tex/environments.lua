@@ -9,7 +9,7 @@ local r    = require('luasnip.extras').rep
 local fmt  = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
 
-local at_line_begin = require('luasnip.extras.expand_conditions').line_begin
+local at_line_begin = require('snippet_utils').context.at_line_begin
 
 return {
 
