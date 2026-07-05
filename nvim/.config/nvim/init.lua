@@ -59,7 +59,8 @@ vim.pack.add({
 	},
 	'https://github.com/nvim-treesitter/nvim-treesitter',
 	'https://github.com/lervag/vimtex',
-	'https://github.com/micangl/cmp-vimtex'
+	'https://github.com/micangl/cmp-vimtex',
+	'https://github.com/stevearc/conform.nvim',
 })
 
 -- =============================================================================
@@ -96,6 +97,8 @@ require('mason').setup()
 local mason_tools = {
 	-- LSPs
 	'lua-language-server', -- lua_ls
+	'clangd',
+	'basedpyright',
 }
 
 local unrecognised_mason_packages = {}

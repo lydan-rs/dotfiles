@@ -12,6 +12,8 @@ require('lazydev').setup({
 
 -- LSP Config Name: lua_ls
 vim.lsp.enable('lua_ls')
+vim.lsp.enable('clangd')
+vim.lsp.enable('basedpyright')
 
 -- =============================================================================
 -- Language Options ============================================================
