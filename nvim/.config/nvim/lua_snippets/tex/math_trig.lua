@@ -11,8 +11,7 @@ local fmta = require('luasnip.extras.fmt').fmta
 
 local in_math_env = require('snippet_utils').context.latex.in_mat_env
 
-return {
-
+return{
 
 	s(
 		{
@@ -58,92 +57,6 @@ return {
 			'\\tan \\left( <> \\right)',
 			{
 				i(1),
-			}
-		)
-	),
-
-
-	s(
-		{
-			trig='log',
-			desc='LaTeX log math function.',
-			snippetType='autosnippet',
-			condition = in_math_env
-		},
-
-		fmta(
-			'\\log_{<>} \\left( <> \\right)',
-			{
-				i(1),
-				i(2),
-			}
-		)
-	),
-
-	s(
-		{
-			trig='ln',
-			desc='LaTeX ln math function.',
-			snippetType='autosnippet',
-			condition = in_math_env
-		},
-
-		fmta(
-			'\\ln \\left( <> \\right)',
-			{
-				i(1),
-			}
-		)
-	),
-
-
-	s(
-		{
-			trig='frac',
-			desc='LaTeX frac math function.',
-			snippetType='autosnippet',
-			condition = in_math_env
-		},
-
-		fmta(
-			'\\frac{<>}{<>}',
-			{
-				i(1),
-				i(2),
-			}
-		)
-	),
-
-
-	s(
-		{
-			trig='srt',
-			desc='LaTeX square root.',
-			snippetType='autosnippet',
-			condition = in_math_env
-		},
-
-		fmta(
-			'\\sqrt{<>}',
-			{
-				i(1),
-			}
-		)
-	),
-
-	s(
-		{
-			trig='root',
-			desc='LaTeX n-root.',
-			snippetType='autosnippet',
-			condition = in_math_env
-		},
-
-		fmta(
-			'\\sqrt[<>]{<>}',
-			{
-				i(1),
-				i(2),
 			}
 		)
 	),

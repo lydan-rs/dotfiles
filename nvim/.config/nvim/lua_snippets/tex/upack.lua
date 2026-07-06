@@ -13,36 +13,38 @@ local ls_events     = require('luasnip.util.events')
 local at_line_begin = require('luasnip.extras.expand_conditions').line_begin
 
 
-local show_if_text = function(args, parent, user_args)
-	-- vim.notify('Hello From Function Node.')
-	-- vim.notify(args[1][1])
-	-- vim.notify('to_show: ' .. user_args)
-	if args[1][1] == '' then
-		return ''
-	else
-		return user_args
-	end
-end
 
-local optionals = function (pos)
+local optional = function (pos, placeholder)
+
+	local show_if_input = function(args, _, user_args)
+		if args[1][1] == '' or args[1][1] == placeholder then
+			return ''
+		else
+			return user_args
+		end
+	end
+
+
 	return sn(
 		pos,
 		{
-			f(show_if_text, {1}, {user_args={'['}}),
-			i(1, '...', {
+			f(show_if_input, {1}, {user_args={'['}}),
+			i(1, placeholder, {
 				node_callbacks = {
 					[ls_events.leave] = function(node)
 						local text = node:get_text()
-						if #text == 1 and text[1] == '...' then
+						if #text == 1 and text[1] == placeholder then
 							node:set_text({''})
 						end
 					end
 				}
 			}),
-			f(show_if_text, {1}, {user_args={']'}}),
+			f(show_if_input, {1}, {user_args={']'}}),
 		}
 	)
 end
+
+
 
 return {
 
@@ -56,34 +58,7 @@ return {
 		fmta(
 			'\\usepackage<>{<>}',
 			{
-				optionals(2),
-				i(1),
-			}
-		)
-	),
-
-	s(
-		{
-			trig='Upack',
-			desc='Adds a usepackage call.',
-			snippetType='autosnippet',
-			condition=at_line_begin,
-		},
-		fmta(
-			'\\Usepackage<><><>{<>}',
-			{
-				f(show_if_text, {2}, {user_args={'['}}),
-				i(2, '...', {
-					node_callbacks = {
-						[ls_events.leave] = function(node)
-							local text = node:get_text()
-							if #text == 1 and text[1] == '...' then
-								node:set_text({''})
-							end
-						end
-					}
-				}),
-				f(show_if_text, {2}, {user_args={']'}}),
+				optional(2, '>OPTS<'),
 				i(1),
 			}
 		)
