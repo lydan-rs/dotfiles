@@ -70,7 +70,10 @@ vim.pack.add({
 require('nvim-treesitter').install({
 	'lua',
 	'markdown',
-	'latex',
+	'c',
+	'cpp',
+	'cmake',
+	'python',
 })
 
 require('aucmds').on_filetype(
@@ -78,7 +81,10 @@ require('aucmds').on_filetype(
   {
 		'lua',
 		'markdown',
-		-- 'tex', -- will let vimtex take care of this!
+		'c',
+		'cpp',
+		'cmake',
+		'python',
 	},
 	function ()
 		vim.treesitter.start()
