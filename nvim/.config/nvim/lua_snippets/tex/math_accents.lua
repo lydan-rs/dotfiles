@@ -8,7 +8,7 @@ local d    = ls.dynamic_node
 local r    = require('luasnip.extras').rep
 local fmta = require('luasnip.extras.fmt').fmta
 
-local in_math_env = require('snippet_utils').context.latex.in_mat_env
+local in_math_env = require('snippet_utils').context.latex.in_math_env
 
 return {
 

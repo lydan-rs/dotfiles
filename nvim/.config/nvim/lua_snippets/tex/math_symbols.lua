@@ -10,7 +10,7 @@ local fmt  = require('luasnip.extras.fmt').fmt
 local fmta = require('luasnip.extras.fmt').fmta
 
 local symbol = function (trigger, code, description)
-	local in_math_env = require('snippet_utils').context.latex.in_mat_env
+	local in_math_env = require('snippet_utils').context.latex.in_math_env
 	local alias = require('snippet_utils').generators.alias
 	return alias(trigger, code, description, in_math_env)
 end
