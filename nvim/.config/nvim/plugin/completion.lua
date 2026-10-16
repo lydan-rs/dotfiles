@@ -1,37 +1,26 @@
--- ======== Lua ================================================================
--- Mason Name: lua-language-server
--- TODO: Only enable on lua files.
-require('lazydev').setup({
-	library = {
-		-- See the configuration section for more details
-		-- Load luvit types when the `vim.uv` word is found
-		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-	},
-})
-
-
--- LSP Config Name: lua_ls
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('clangd')
-vim.lsp.enable('basedpyright')
-
 -- =============================================================================
--- Language Options ============================================================
+-- Completion ==================================================================
 -- =============================================================================
 
-require("luasnip.loaders.from_vscode").lazy_load()
-local snippets_path = vim.fn.stdpath('config') .. '/lua_snippets/'
-vim.notify('LuaSnip snippets folder: ' .. snippets_path)
-require('luasnip.loaders.from_lua').lazy_load({
-	paths = snippets_path,
-	fs_event_providers = {libuv = true},
-})
-require('luasnip').setup({
-	enable_autosnippets = true,
-	update_events = {'TextChanged', 'TextChangedI'},
-})
+-- vim.opt.completeopt = "menuone,noinsert,noselect" -- completion options
+-- For insert mode completion.
+-- Using Blink for this.
+-- vim.opt.completeopt = {
+-- 	"menuone",
+-- 	-- "noinsert",
+-- 	"noselect",
+-- 	-- "fuzzy",
+-- 	-- "popup",
+-- }
+
+vim.opt.wildmenu = true -- tab completion
+vim.opt.wildmode = {
+	"longest:full",
+	"full",
+} -- complete longest common match, full completion list, cycle through with Tab
 
 -- require('friendly-snippets').setup() Not necessary. Called automatically by blink.
+
 require('blink.compat').setup({})
 require('blink.cmp').setup({
 	keymap = { preset = 'default' },
