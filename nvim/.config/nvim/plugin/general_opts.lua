@@ -9,7 +9,8 @@ require('mini.icons').setup()
 
 vim.g.havenerdfont = true
 
-vim.cmd.colorscheme("miniautumn")
+-- vim.cmd.colorscheme("miniautumn")
+vim.cmd.colorscheme("ayu-dark")
 
 vim.opt.number         = true -- line number
 vim.opt.relativenumber = true -- relative line numbers

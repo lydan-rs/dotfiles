@@ -39,6 +39,7 @@ require('aucmds').on_pack(
 -- =============================================================================
 
 vim.pack.add({
+	'https://github.com/Shatur/neovim-ayu',
 	'https://github.com/nvim-mini/mini.nvim',
 	'https://github.com/ibhagwan/fzf-lua',
 	'https://github.com/mason-org/mason.nvim',
@@ -128,74 +129,3 @@ if #unrecognised_mason_packages > 0 then
  end
 	vim.notify(msg, vim.log.levels.WARN)
 end
-
-
--- =============================================================================
--- Overview ====================================================================
--- =============================================================================
---[[
-	== To Add ==
-	Completion and Snippets
-	Improved command line
-	Vim api completion
-	Language support for lua, markdown, latex, c, go, python, md, html, css, javascript
-	Diagnostics
-	Proper documentation
-	Context
-
-	== To Understand Better ==
-	Search, grep and regex
-	Textobjects and operators
-	Quickfix list
-	mini.files
-	lua
-	FileType autocommand events
-
-
-	== Dependencies ==
-	ripgrep
-	fzf
-	treesitter-cli
-	bat
-	add `fd` for better find
---]]
-
--- vim.o for normal options
--- vim.opt like vim.o, but uses lua tables as args, instead of strings
--- vim.go for global options
--- vim.g vs vim.go
--- vim.bo for buffer scoped options
--- vim.wo for window scoped options
---
--- == Features ==
--- Auto open help on left (or floating if possible)
-
---[[
-backup
-writebackup
-undofile
-undodir
-
-virtualedit
-infercase
-splitkeep
-shortmess
-ruler
-fillchars
-breakindent
-
-confirm
-showmode
-timeoutlen
-updatetime
-diagnostic
-swapfile
-vim.opt.ttimeoutlen = 0 -- key code timeout
-vim.opt.iskeyword:append("-") -- include - in words
-vim.opt.path:append("**") -- include subdirs in search
-vim.opt.diffopt:append("linematch:60") -- improve diff display
-vim.opt.redrawtime = 10000 -- increase neovim redraw tolerance
-vim.opt.maxmempattern = 20000 -- increase max memory
---]]
-
-
