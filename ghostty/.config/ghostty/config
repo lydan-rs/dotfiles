@@ -3,3 +3,4 @@
 theme = Ayu
 font-size = 14
 adjust-cell-height = +15%
+mouse-scroll-multiplier = precision:0.2,discrete:0.1
