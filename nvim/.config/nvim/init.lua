@@ -5,6 +5,7 @@ vim.g.maplocalleader = " "
 -- Plugin Hooks ================================================================
 -- =============================================================================
 
+
 require('aucmds').on_pack(
 	'LuaSnip install jsregexp on install/update.',
 	'LuaSnip',
@@ -44,23 +45,23 @@ vim.pack.add({
 	'https://github.com/ibhagwan/fzf-lua',
 	'https://github.com/mason-org/mason.nvim',
 	'https://github.com/neovim/nvim-lspconfig',
-	'https://github.com/folke/lazydev.nvim',
-	'https://github.com/rafamadriz/friendly-snippets',
+	-- 'https://github.com/folke/lazydev.nvim',
+	-- 'https://github.com/rafamadriz/friendly-snippets',
 	{
 		src = 'https://github.com/L3MON4D3/LuaSnip',
 		version = vim.version.range('v2.*'),
 	},
-	{
-		src = 'https://github.com/saghen/blink.cmp',
-		version = vim.version.range('1.x'),
-	},
-	{
-		src = 'https://github.com/saghen/blink.compat',
-		version = vim.version.range('2.x'),
-	},
+	-- {
+	-- 	src = 'https://github.com/saghen/blink.cmp',
+	-- 	version = vim.version.range('1.x'),
+	-- },
+	-- {
+	-- 	src = 'https://github.com/saghen/blink.compat',
+	-- 	version = vim.version.range('2.x'),
+	-- },
 	'https://github.com/nvim-treesitter/nvim-treesitter',
 	'https://github.com/lervag/vimtex',
-	'https://github.com/micangl/cmp-vimtex',
+	-- 'https://github.com/micangl/cmp-vimtex',
 	'https://github.com/stevearc/conform.nvim',
 })
 

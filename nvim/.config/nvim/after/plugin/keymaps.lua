@@ -52,6 +52,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
       return { desc = description, buffer = buf, silent = true }
     end
 
+		if supports_method("textDocument/completion") then
+			vim.lsp.completion.enable(true, client.id, buf, {
+					autotrigger = true,
+			})
+    end
+
 		if supports_method('textDocument/definition') then
 			map('n', '<leader>gd', lsp.definition, genOpts("Goto Definition"))
 		end
@@ -81,7 +87,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		if supports_method('textDocument/signature_help') then
 			local opts = genOpts("Show Signature Help")
 			map('n', '<leader>cH', lsp.signature_help, opts)
-			map('n', '<C-K>', lsp.signature_help, opts)
+			-- map('n', '<C-K>', lsp.signature_help, opts)
 		end
 
 		if supports_method('textDocument/rename') then
