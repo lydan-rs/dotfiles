@@ -1,16 +1,17 @@
 -- =============================================================================
--- LSP =========================================================================
+-- Mason =======================================================================
 -- =============================================================================
 
--- TODO: Only enable on lua files.
--- require('lazydev').setup({
--- 	library = {
--- 		-- See the configuration section for more details
--- 		-- Load luvit types when the `vim.uv` word is found
--- 		{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
--- 	},
--- })
+require('tool_utils').try_mason_setup()
 
+require('tool_utils').try_mason_install('lua-language-server') -- lua_ls
+require('tool_utils').try_mason_install('clangd')
+require('tool_utils').try_mason_install('basedpyright')
+
+
+-- =============================================================================
+-- LSP =========================================================================
+-- =============================================================================
 
 -- LSP Config Name: lua_ls
 vim.lsp.enable('lua_ls')

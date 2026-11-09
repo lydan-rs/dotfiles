@@ -1,3 +1,9 @@
+if vim.g.use_blink_cmp then
+	vim.notify("Using blink completion.")
+else
+	vim.notify("Using builtin completion.")
+end
+
 local map = vim.keymap.set
 -- =============================================================================
 -- Keymaps =====================================================================
